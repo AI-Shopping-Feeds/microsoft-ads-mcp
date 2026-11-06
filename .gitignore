@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# --- AI Shopping Feeds: credentials, local config and tool output ---
+# Never commit Microsoft credentials, developer tokens or refresh tokens.
+.env
+.env.*
+!.env.example
+secrets/
+*.pem
+*.p8
+*token*.json
+# Audit logs written by the server (may contain Microsoft Advertising data)
+logs/
+*.jsonl
+*.jsonl.tmp
+# Report or bulk exports, if you save any by hand
+reports/
+*.zip
+# Tool caches, build output and OS files
+.venv/
+.venv-*/
+venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+.DS_Store
+.idea/
+.vscode/
