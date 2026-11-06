@@ -190,12 +190,15 @@ def register_entity(
             out["PartialErrors"] = errors
         return with_errors(out)
 
-    def do_create(items, parent_id, account_id, customer_id, confirm):
-        check_items(items, spec.label, spec.max_items)
+    def check_types(items):
         if spec.needs_type:
             missing = [i for i, it in enumerate(items) if not it.get("Type")]
             if missing:
                 raise ValueError(f"Every item needs a Type; missing at index {missing[:10]}.")
+
+    def do_create(items, parent_id, account_id, customer_id, confirm):
+        check_items(items, spec.label, spec.max_items)
+        check_types(items)
         payload = [{**spec.create_defaults, **it} for it in items]
         decision = safety.assess(
             client.config,
@@ -219,6 +222,7 @@ def register_entity(
 
     def do_update(items, parent_id, account_id, customer_id, confirm):
         check_items(items, spec.label, spec.max_items)
+        check_types(items)
         ids = require_ids(items)
         before = client.snapshot(
             fetch,

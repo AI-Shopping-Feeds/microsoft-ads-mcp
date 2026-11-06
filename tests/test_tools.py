@@ -153,6 +153,10 @@ async def test_ads_need_a_type(config: Config) -> None:
         config, "microsoft_ads_create_ads", {"ad_group_id": "3", "items": [{"FinalUrls": []}]}
     )
     assert "Type" in error_text(result)
+    result = await call(
+        config, "microsoft_ads_update_ads", {"ad_group_id": "3", "items": [{"Id": "1"}]}
+    )
+    assert "Type" in error_text(result)
 
 
 def test_build_rsa_checks_lengths() -> None:

@@ -122,6 +122,7 @@ def register(mcp, client: MicrosoftAdsClient) -> None:
         need confirm='APPLY'.
         """
         noun, (field, spec) = _entity(entity, BID_ENTITIES)
+        parent_id = need_id(parent_id, "parent_id")
         id_list = ids_to_strings(ids)
         if not id_list:
             raise ValueError("Pass at least one ID.")
