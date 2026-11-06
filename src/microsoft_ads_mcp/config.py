@@ -96,7 +96,6 @@ class Config:
     token_file: Path | None = None
     # True when the refresh token came from MICROSOFT_ADS_REFRESH_TOKEN rather than the file.
     refresh_token_from_env: bool = False
-    page_size: int = 100
     timeout: float = 60.0
     dry_run: bool = False
     log_level: str = "INFO"
@@ -292,7 +291,6 @@ def load_config(env_file: Path | None = None, *, require_refresh_token: bool = T
         audit_log=audit_log_path(),
         token_file=token_file,
         refresh_token_from_env=bool(os.environ.get("MICROSOFT_ADS_REFRESH_TOKEN", "").strip()),
-        page_size=_int("MICROSOFT_ADS_PAGE_SIZE", "100"),
         timeout=_float("MICROSOFT_ADS_TIMEOUT", "60"),
         dry_run=_truthy(os.environ.get("MICROSOFT_ADS_DRY_RUN")),
         log_level=os.environ.get("MICROSOFT_ADS_LOG_LEVEL", "INFO").upper(),
